@@ -163,7 +163,6 @@ public class ColecaoActivity extends FragmentActivity {
             }
         });
     }
-
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -171,12 +170,10 @@ public class ColecaoActivity extends FragmentActivity {
         finish();
         startActivity(getIntent());
     }
-
     @Override
     public void onResume() {
         super.onResume();
     }
-
     //Obter local quando capturar imagem
     public void obterLocal() {
         if (Build.VERSION.SDK_INT >= 23) { // verificação de versao do Android e permissões
@@ -203,13 +200,10 @@ public class ColecaoActivity extends FragmentActivity {
                         ", " + String.format("%.5f", locat.getLongitude()).replace(",", ".");
                 localizacao = locat;
             }
-
             public void onStatusChanged(String provider, int status, Bundle extras) {
             }
-
             public void onProviderEnabled(String provider) {
             }
-
             public void onProviderDisabled(String provider) {
             }
         };

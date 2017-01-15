@@ -139,6 +139,8 @@ public class Bancodedados extends AppCompatActivity {
         fl.delete();
         File fl2 = new File(nome.substring(0, nome.lastIndexOf(".")) + "tmb.jpg");
         fl2.delete();
+        File fl3 = new File(nome.substring(0, nome.lastIndexOf(".")) + "med.png");
+        fl3.delete();
         bd.execSQL("delete from imagem where path = '" + nome + "'");
     }
 
@@ -158,6 +160,9 @@ public class Bancodedados extends AppCompatActivity {
             File fl2 = new File(cursor.getString(cursor.getColumnIndex("path")).substring(0,
                     cursor.getString(cursor.getColumnIndex("path")).lastIndexOf(".")) + "tmb.jpg");
             fl2.delete();
+            File fl3 = new File(cursor.getString(cursor.getColumnIndex("path")).substring(0,
+                    cursor.getString(cursor.getColumnIndex("path")).lastIndexOf(".")) + "med.png");
+            fl3.delete();
             cursor.moveToNext();
         }
         bd.execSQL("drop table colecao");
@@ -183,6 +188,9 @@ public class Bancodedados extends AppCompatActivity {
                 fileOld.renameTo(fileNovo);
                 fileOld = new File(path.substring(0, path.lastIndexOf(".")) + "tmb.jpg");
                 fileNovo = new File(pathNovo.substring(0, pathNovo.lastIndexOf(".")) + "tmb.jpg");
+                fileOld.renameTo(fileNovo);
+                fileOld = new File(path.substring(0, path.lastIndexOf(".")) + "med.png");
+                fileNovo = new File(pathNovo.substring(0, pathNovo.lastIndexOf(".")) + "med.png");
                 fileOld.renameTo(fileNovo);
             }
             bd.execSQL("update imagem set titulo = '" + tituloNew + "' where titulo = '" + tituloOld + "'");
@@ -240,6 +248,8 @@ public class Bancodedados extends AppCompatActivity {
         cursor.moveToFirst();
         if (cursor.getCount() > 0) {
             bd.execSQL("update imagem set medida = NULL where path = '" + dir + "'");
+            File file = new File(dir.substring(0, dir.lastIndexOf("."))+"med.png");
+            file.delete();
         }
         return "Medidas apagadas.";
     }

@@ -23,6 +23,10 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public class DrawActivity extends Activity {
@@ -86,10 +90,17 @@ public class DrawActivity extends Activity {
 
         opt = new BitmapFactory.Options();
         opt.inMutable = true;
-        opt.inSampleSize = 2;
-        bmp = BitmapFactory.decodeFile(path, opt);
-        bmp2 = BitmapFactory.decodeFile(path, opt);
-
+        // abrindo imagem (com medida ou sem medida se nao tiver)
+        File file = new File(path.substring(0, path.lastIndexOf("."))+"med.png");
+        if (file.exists()) {
+            bmp = BitmapFactory.decodeFile(path.substring(0, path.lastIndexOf(".")) + "med.png", opt);
+            bmp2 = BitmapFactory.decodeFile(path.substring(0, path.lastIndexOf(".")) + "med.png", opt);
+        }
+        else {
+            bmp = BitmapFactory.decodeFile(path, opt);
+            bmp2 = BitmapFactory.decodeFile(path, opt);
+        }
+        // adaptando toque ao tamanho da tela e imagem
         float cte = (float) bmp.getWidth() / (float) bmp.getHeight();
         if (bmp.getHeight() > bmp.getWidth()) {
             bmp = Bitmap.createScaledBitmap(bmp, p.x - (int) (128f * cte), p.y - 128, false);
@@ -100,13 +111,12 @@ public class DrawActivity extends Activity {
             bmp2 = Bitmap.createScaledBitmap(bmp, p.x, (int)((float)p.x/cte), false);
         }
         iv.setImageBitmap(bmp);
-
         paint = new Paint();
         paint.setColor(Color.RED);
         paint.setStrokeWidth(5);
         canvas = new Canvas(bmp);
 
-        // verifivando e desenhando as medidas salvas no BD
+        // verificando as medidas salvas no BD
         itemBanco = new Bancodedados();
         medidas = itemBanco.verMedida(bd, path, getApplicationContext());
         for (int i = 0; i < medidas.size(); i++) {
@@ -129,31 +139,28 @@ public class DrawActivity extends Activity {
             switch (i) {
                 case 0:
                     t1.setText(size);
-                    paint.setColor(Color.RED);
+                    paint.setColor(Color.GREEN);
                     break;
                 case 1:
                     t2.setText(size);
-                    paint.setColor(Color.GREEN);
+                    paint.setColor(Color.BLUE);
                     break;
                 case 2:
                     t3.setText(size);
-                    paint.setColor(Color.BLUE);
+                    paint.setColor(Color.YELLOW);
                     break;
                 case 3:
                     t4.setText(size);
-                    paint.setColor(Color.YELLOW);
+                    paint.setColor(Color.MAGENTA);
                     break;
                 case 4:
                     t5.setText(size);
-                    paint.setColor(Color.MAGENTA);
-                    break;
-                default:
                     paint.setColor(Color.RED);
+                    break;
+                default: paint.setColor(Color.RED);;
             }
-            canvas.drawLine(mX, mY, fX, fY, paint);
+            //canvas.drawLine(mX, mY, fX, fY, paint);
         }
-        paint.setColor(Color.RED);
-
         // desenhando linhas para inserir medidas
         iv.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -226,7 +233,6 @@ public class DrawActivity extends Activity {
             }
         });
     }
-
     // salvando a medida
     public void medidas() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(DrawActivity.this);
@@ -242,11 +248,18 @@ public class DrawActivity extends Activity {
                 String medida = texto.getText().toString().replace(",", ".");
                 medida = med + mX + "," + mY + "," + fX + "," + fY + "," + medida + "/";
                 String mensagemToast = itemBanco.novaMedida(bd, medida, path);
+
+                // salvando imagem com as medidas
+                File file = new File(path.substring(0, path.lastIndexOf("."))+"med.png");
+                try {
+                    bmp2.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(file));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
                 Toast.makeText(getApplicationContext(), mensagemToast, Toast.LENGTH_LONG).show();
                 recreate();
             }
         });
-        // cancelando medida
         dialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
