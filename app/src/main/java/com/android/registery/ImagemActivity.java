@@ -237,7 +237,7 @@ public class ImagemActivity extends AppCompatActivity {
         if (extra != null) {
             img = (Item) getIntent().getSerializableExtra("imagem");
             String tit = img.getImagemPath();
-            tit = tit.substring(tit.lastIndexOf("/") + 1, tit.length());
+            tit = tit.substring(tit.lastIndexOf("/") + 1, tit.lastIndexOf("."));
             tituloImagem.setText(tit);
             dataImagem.setText(img.getDataImagem());
             if (img.getObs() == null)
