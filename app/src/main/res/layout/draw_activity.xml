@@ -164,7 +164,7 @@
         android:id="@+id/fab2"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginRight="6dp"
+        android:layout_marginRight="4dp"
         app:backgroundTint="@color/red"
         app:layout_anchor="@id/card_view2"
         app:layout_anchorGravity="bottom|end"
@@ -176,7 +176,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:layout_gravity="bottom|end"
-        card_view:cardCornerRadius="8dp">
+        card_view:cardCornerRadius="4dp">
 
         <ImageView
             android:layout_width="wrap_content"
