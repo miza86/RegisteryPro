@@ -50,8 +50,11 @@ public class ItemAdapter extends BaseAdapter {
         LayoutInflater inflate = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View layout = inflate.inflate(R.layout.imagens, null);
 
-        TextView titulo = (TextView) layout.findViewById(R.id.tvlista);
-        titulo.setText(item.getDataImagem()/*+"\n"+item.getLocalImagem()*/);
+        TextView titulo = (TextView) layout.findViewById(R.id.tvimagem);
+        titulo.setText(item.getTitulo());
+
+        TextView titulo2 = (TextView) layout.findViewById(R.id.tvlista);
+        titulo2.setText(item.getDataImagem()/*+"\n"+item.getLocalImagem()*/);
 
         String path = item.getImagemPath();
         path = path.substring(0, path.lastIndexOf(".")) + "tmb.jpg";

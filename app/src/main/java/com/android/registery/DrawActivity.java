@@ -8,10 +8,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.CardView;
 import android.text.method.DigitsKeyListener;
 import android.text.method.KeyListener;
 import android.view.Display;
@@ -43,12 +45,14 @@ public class DrawActivity extends Activity {
     private TextView t1, t2, t3, t4, t5, t6;
     private Canvas canvas;
     private FloatingActionButton ll;
+    private CardView rotate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.draw_activity);
 
+        rotate = (CardView) findViewById(R.id.rotate);
         iv = (ImageView) findViewById(R.id.imagemView);
         bd = openOrCreateDatabase("registery", MODE_PRIVATE, null);
         path = (String) getIntent().getSerializableExtra("imagem");
@@ -88,9 +92,9 @@ public class DrawActivity extends Activity {
         Point p = new Point();
         display.getSize(p);
 
+        // abrindo imagem (com medida ou sem medida se nao tiver)
         opt = new BitmapFactory.Options();
         opt.inMutable = true;
-        // abrindo imagem (com medida ou sem medida se nao tiver)
         File file = new File(path.substring(0, path.lastIndexOf("."))+"med.png");
         if (file.exists()) {
             bmp = BitmapFactory.decodeFile(path.substring(0, path.lastIndexOf(".")) + "med.png", opt);
@@ -115,6 +119,14 @@ public class DrawActivity extends Activity {
         paint.setColor(Color.RED);
         paint.setStrokeWidth(5);
         canvas = new Canvas(bmp);
+
+        //ROTACIONANDO IMAGEM
+        rotate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rotacionar();
+            }
+        });
 
         // verificando as medidas salvas no BD
         itemBanco = new Bancodedados();
@@ -269,5 +281,65 @@ public class DrawActivity extends Activity {
         });
         dialog.create();
         dialog.show();
+    }
+    // FUNÇÃO PARA ROTACIONAR IMAGEM
+    public void rotacionar () {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(90);
+
+        Bitmap bmpR = Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), matrix, true);
+        File file = new File(path.substring(0, path.lastIndexOf(".")) + "med.png");
+        try {
+            bmpR.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(file));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        /*Bitmap bmpTmb = BitmapFactory.decodeFile(path.substring(0, path.lastIndexOf(".")) + "tmb.jpg", opt);
+        Bitmap bmpTmbR = Bitmap.createBitmap(bmpTmb, 0, 0, bmpTmb.getWidth(), bmpTmb.getHeight(), matrix, true);
+        File file2 = new File(path.substring(0, path.lastIndexOf(".")) + "tmb.jpg");
+        try {
+            bmpTmbR.compress(Bitmap.CMatrix matrix = new Matrix();
+                matrix.postRotate(90);
+
+                Bitmap bmpR = Bitmap.createBitmap(bmp , 0, 0, bmp.getWidth(), bmp.getHeight(), matrix, true);
+                File file = new File(path.substring(0, path.lastIndexOf("."))+"med.png");
+                try {
+                    bmpR.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(file));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+                Bitmap bmpTmb = BitmapFactory.decodeFile(path.substring(0, path.lastIndexOf(".")) + "tmb.jpg", opt);
+                Bitmap bmpTmbR = Bitmap.createBitmap(bmpTmb , 0, 0, bmpTmb.getWidth(), bmpTmb.getHeight(), matrix, true);
+                File file2 = new File(path.substring(0, path.lastIndexOf("."))+"tmb.jpg");
+                try {
+                    bmpR.compress(Bitmap.CompressFormat.JPEG, 50, new FileOutputStream(file2));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+                Bitmap bmpCln = BitmapFactory.decodeFile(path, opt);
+                Bitmap bmpClnR = Bitmap.createBitmap(bmpCln, 0, 0, bmpCln.getWidth(), bmpCln.getHeight(), matrix, true);
+                File file3 = new File(path);
+                try {
+                    bmpR.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(file3));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+                recreate();ompressFormat.JPEG, 50, new FileOutputStream(file2));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        Bitmap bmpCln = BitmapFactory.decodeFile(path, opt);
+        Bitmap bmpClnR = Bitmap.createBitmap(bmpCln, 0, 0, bmpCln.getWidth(), bmpCln.getHeight(), matrix, true);
+        File file3 = new File(path);
+        try {
+            bmpClnR.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(file3));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }*/
+        recreate();
     }
 }

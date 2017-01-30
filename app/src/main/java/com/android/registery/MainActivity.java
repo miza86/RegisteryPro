@@ -23,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView lv;
     private Toolbar toolbar;
     private String nomeBD;
+    private ImageView dots;
     private AdapterView.AdapterContextMenuInfo info;
 
     @Override
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         lv = (ListView) findViewById(R.id.lv);
+        dots = (ImageView) findViewById(R.id.buttondot);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         registerForContextMenu(lv);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -86,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         // Segurando o item da coleção
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -128,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     // Recarregando coleções na tela
     @Override
     public void onResume() {
@@ -137,14 +140,12 @@ public class MainActivity extends AppCompatActivity {
         lista = itemBanco.listarColecoes(bd, nomeBD);
         lv.setAdapter(new ColecaoAdapter(this, lista));
     }
-
     // Menu de opções
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
     // Itens do menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -171,7 +172,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
-
     // Menu de contexto para Long Press da coleção selecionada
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
@@ -179,7 +179,6 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_colecao, menu);
     }
-
     @Override
     public boolean onContextItemSelected(final MenuItem item) {
         info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();

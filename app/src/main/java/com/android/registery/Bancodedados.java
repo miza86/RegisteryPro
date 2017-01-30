@@ -117,7 +117,6 @@ public class Bancodedados extends AppCompatActivity {
             bd.execSQL("update colecao set local = '" + cidade + "' where titulo ='" + titulo + "'");
         else if (cursor.getString(cursor.getColumnIndex("local")).equals("Local não definido") && !local.equals("Local não definido"))
             bd.execSQL("update colecao set local = '" + cidade + "' where titulo ='" + titulo + "'");
-        Item item = new Item(titulo, dir, hora, local, null, null);
         return new Item(titulo, dir, hora, local, null, null);
     }
 

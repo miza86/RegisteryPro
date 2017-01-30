@@ -71,8 +71,8 @@ public class ColecaoAdapter extends BaseAdapter {
         TextView titulo = (TextView) layout.findViewById(R.id.t1);
         titulo.setText(colecao.getTitulo());
 
-        TextView data = (TextView) layout.findViewById(R.id.t2);
-        data.setText(colecao.getHora().substring(0, 10));
+        //TextView data = (TextView) layout.findViewById(R.id.t2);
+        //data.setText(colecao.getHora().substring(0, 10));
 
         TextView local = (TextView) layout.findViewById(R.id.t3);
         local.setText(colecao.getLocal());

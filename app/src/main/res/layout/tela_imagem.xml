@@ -31,70 +31,73 @@
             <ImageView
                 android:id="@+id/imagem"
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
+                android:layout_height="match_parent"
+
+                app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
                 android:scaleType="centerCrop"
-                app:layout_collapseMode="parallax"
-                app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed" />
+                app:layout_collapseMode="parallax" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:background="@color/colorPrimaryDark"
                 android:orientation="vertical"
-                android:paddingBottom="12dp"
+                android:layout_gravity="bottom"
+                android:background="#33000000"
                 android:paddingLeft="16dp"
+                android:paddingBottom="12dp"
                 android:paddingTop="4dp">
 
                 <TextView
-                    android:id="@+id/tvimagem"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#fff"
-                    android:textSize="32dp" />
+                    android:id="@+id/tvimagem"
+                    android:textSize="32dp"
+                    android:textAlignment="center"
+                    android:textColor="#fff" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:orientation="horizontal">
-
                     <ImageView
-                        android:id="@+id/icon2"
                         android:layout_width="18dp"
                         android:layout_height="18dp"
-                        android:layout_marginRight="5dp"
+                        android:id="@+id/icon2"
+                        android:src="@drawable/icon_2"
                         android:layout_marginTop="2dp"
-                        android:src="@drawable/icon_2" />
-
+                        android:layout_marginRight="5dp"
+                        />
                     <TextView
-                        android:id="@+id/dataimagem"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:id="@+id/dataimagem"
                         android:text="Data"
                         android:textColor="#fff"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"/>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:orientation="horizontal">
-
                     <ImageView
-                        android:id="@+id/icon"
                         android:layout_width="18dp"
                         android:layout_height="18dp"
-                        android:layout_marginRight="5dp"
+                        android:id="@+id/icon"
+                        android:src="@drawable/icon_1"
                         android:layout_marginTop="2dp"
-                        android:src="@drawable/icon_1" />
-
+                        android:layout_marginRight="5dp"/>
                     <TextView
-                        android:id="@+id/localimagem"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:id="@+id/localimagem"
                         android:text="Local"
                         android:textColor="#fff"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -105,33 +108,39 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:fillViewport="true"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp"
-        android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_marginTop="8dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_gravity="center">
 
             <TextView
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textAlignment="center"
                 android:text="Anotações"
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
 
+                android:textSize="24sp"
+                android:textColor="#000"/>
             <TextView
-                android:id="@+id/textoimagem"
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:textAlignment="center"
+                android:id="@+id/textoimagem"
+                android:textColor="#555"
+                android:textSize="18sp"
+                android:textStyle="italic"
                 android:paddingLeft="4dp"
-                android:paddingRight="4dp"
-                android:textColor="#000"
-                android:textSize="18sp" />
+                android:paddingRight="4dp"/>
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
@@ -143,19 +152,19 @@
         android:layout_marginBottom="20dp">
 
         <ImageView
-            android:id="@+id/recycle"
             android:layout_width="40dp"
             android:layout_height="match_parent"
+            android:src="@drawable/recycle"
             android:background="#6000"
             android:paddingLeft="14dp"
-            android:src="@drawable/recycle" />
+            android:id="@+id/recycle"/>
 
         <SeekBar
             android:id="@+id/seekbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#6000"
-            android:progressBackgroundTint="#fff" />
+            android:progressBackgroundTint="#fff"
+            android:background="#6000"/>
 
     </LinearLayout>
 
@@ -166,6 +175,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="@dimen/fab_margin"
         android:layout_marginRight="@dimen/fab_margin"
-        app:srcCompat="@drawable/fabback"></android.support.design.widget.FloatingActionButton>
+        app:srcCompat="@drawable/fabback">
+    </android.support.design.widget.FloatingActionButton>
 
 </android.support.design.widget.CoordinatorLayout>

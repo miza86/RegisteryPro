@@ -172,6 +172,7 @@
     </android.support.design.widget.FloatingActionButton>
 
     <android.support.v7.widget.CardView
+        android:id="@+id/rotate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"

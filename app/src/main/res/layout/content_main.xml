@@ -4,14 +4,16 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="56dp"
     android:orientation="vertical"
-    tools:context="com.android.registery.MainActivity">
+    android:background="#FAFAFA"
+    tools:context="com.android.registery.MainActivity"
+    android:layout_marginTop="56dp">
 
     <ListView
+        android:padding="4dp"
         android:id="@+id/lv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="4dp"></ListView>
+        android:layout_height="wrap_content">
+    </ListView>
 
 </LinearLayout>
