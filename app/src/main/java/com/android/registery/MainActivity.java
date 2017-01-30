@@ -23,7 +23,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -40,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     private ListView lv;
     private Toolbar toolbar;
     private String nomeBD;
-    private ImageView dots;
     private AdapterView.AdapterContextMenuInfo info;
 
     @Override
@@ -63,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         lv = (ListView) findViewById(R.id.lv);
-        dots = (ImageView) findViewById(R.id.buttondot);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         registerForContextMenu(lv);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
